@@ -8,4 +8,4 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def home():
     tasks = Task.query.all()
-    return render_template("base.html", tasks=tasks)
+    return render_template("app/templates/base.html", tasks=tasks)
