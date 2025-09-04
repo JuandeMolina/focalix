@@ -8,7 +8,6 @@ class Task(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     title: so.Mapped[str] = so.mapped_column(sa.String(128), nullable=False)
     description: so.Mapped[Optional[str]] = so.mapped_column(sa.Text)
-    type: so.Mapped[str] = so.mapped_column(sa.String(64), nullable=False)
     created_at: so.Mapped[sa.DateTime] = so.mapped_column(
         sa.DateTime, server_default=sa.func.now()
     )

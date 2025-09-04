@@ -5,7 +5,17 @@ from . import db
 main = Blueprint("main", __name__)
 
 
+# Main page
 @main.route("/")
 def home():
-    tasks = Task.query.all()
-    return render_template("app/templates/base.html", tasks=tasks)
+    return render_template("inicio.html")
+
+
+@main.route("/tasks")
+def tasks():
+    return render_template("tasks.html")
+
+
+@main.route("/settings")
+def settings():
+    return render_template("settings.html")
