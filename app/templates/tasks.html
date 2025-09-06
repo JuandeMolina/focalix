@@ -4,5 +4,35 @@
 
 {% block content %}
 <h1>Tasks</h1>
-<!-- Add your tasks content here -->
+<form method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" required><br>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea><br>
+    <label for="due_date">Due Date:</label>
+    <input type="date" name="due_date" id="due_date"><br>
+    <button type="submit">Add Task</button>
+</form>
+<hr>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<ul>
+{% for task in tasks %}
+    <li>
+        <strong>{{ task.title }}</strong> - {{ task.description }}
+        {% if task.due_date %} (Due: {{ task.due_date.strftime('%Y-%m-%d') }}){% endif %}
+        <a href="{{ url_for('main.edit_task', task_id=task.id) }}">Edit</a>
+        <form method="POST" action="{{ url_for('main.delete_task', task_id=task.id) }}" style="display:inline;">
+            <button type="submit" onclick="return confirm('Delete this task?');">Delete</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
 {% endblock %}

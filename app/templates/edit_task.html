@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit Task</h1>
+<form method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title" value="{{ task.title }}" required><br>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description">{{ task.description }}</textarea><br>
+    <label for="due_date">Due Date:</label>
+    <input type="date" name="due_date" id="due_date" value="{{ task.due_date|default('') }}"><br>
+    <button type="submit">Update</button>
+</form>
+<a href="{{ url_for('main.tasks') }}">Back to tasks</a>
+{% endblock %}
